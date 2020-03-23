@@ -5,6 +5,8 @@ body{
 table{
     border:1px solid black;
     width: 500px;
+    background-color: rgb(75, 73, 73);
+    color: rgb(180, 238, 153);
 
 }
 td{
@@ -17,4 +19,6 @@ td{
     height: 40%;
     text-align: right;
     cursor: default;
+    background-color: grey;
+    
 }
