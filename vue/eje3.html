@@ -6,14 +6,16 @@
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!--Libreria Vue-->
     <style>
-        .active{color:white}
+        .active{color:white; }
     </style>
 </head>
 <body>
+    <!--En este ejemplo se crea una tabla mediante un bucle, el cual añade las culumnas a la fila creada, 
+    se da estilos a la tabla, se inyecta la clase active y se crea un evento click-->
     <div id="app">
-       <table v-bind:style="styleTable" v-bind:class="tableClass" @click='cambioColor()'>
+       <table v-bind:style="styleTable" v-bind:class="tableClass" @click='cambioColor()'> 
            <tr>
-             <td v-for="columnas in fila" v-bind:style="styleColumn">
+             <td v-for="columnas in fila" v-bind:style="styleColumn"> 
                   {{columnas.text}}
               </td>
            </tr>
@@ -26,18 +28,18 @@
         el:'#app',
         data:{
             fila:[
-                {text: 'Columna 1 de la fila 1'},
+                {text: 'Columna 1 de la fila 1'}, //se añaden  dos columnas a la fila
                 {text:'Columna 2 de la fila 1'}
             ],
            tableClass:{
-            active:true
+            active:true //la clase active de la tabla 
            },
-            styleTable:{
+            styleTable:{ //resto de estilos de la tabla 
                 border:'1px solid black',
                 background:'grey',
                 cursor:'pointer',
             },
-            styleColumn:{
+            styleColumn:{ //estilos de las columnas
                border:'1px solid black',
                
             },
@@ -45,7 +47,7 @@
             
         },
        
-        methods:{
+        methods:{ //metodo que al pulsar en la tabla, la clase active se vuelve false
             cambioColor:function(){
                 return this.tableClass=!this.tableClass;
             }
