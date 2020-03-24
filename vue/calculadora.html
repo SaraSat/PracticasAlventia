@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/PracticasAlventia/calculadora/calculadora.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!--Libreria Vue-->
+</head>
+<body>
+    <div>
+        <table  id="calculadora">
+            <tr>
+                <td  colspan="4" class="result">{{result}}</td>
+            </tr>
+            <tr>
+                <td class="button" @click='operate("7")' >7</td>
+                <td class="button" @click='operate("8")' >8</td>
+                <td class="button" @click='operate("9")' >9</td>
+                <td class="button" @click='operate("*")' >*</td>
+            </tr>
+            <tr>
+                <td class="button" @click='operate("4")' >4</td>
+                <td class="button" @click='operate("5")'>5</td>
+                <td class="button" @click='operate("6")' >6</td>
+                <td class="button" @click='operate("-")' >-</td>
+            </tr>
+            <tr>
+                <td class="button" @click='operate("1")' >1</td>
+                <td class="button" @click='operate("2")' >2</td>
+                <td class="button" @click='operate("3")' >3</td>
+                <td class="button" @click='operate("+")'>+</td>
+            </tr>
+            <tr>
+                <td class="button" @click='operate("0")'>0</td>
+                <td class="reset" @click='reset'>R</td>
+                <td class="calculate" @click='calculate'>=</td>
+                <td class="button" @click='operate("/")'>/</td>
+            </tr>
+        </table>
+    </div>
+</body>
+<script>
+    var calculadora= new Vue({
+        el:'#calculadora',
+        data:{
+            result:"0"
+        },
+        methods:{
+            operate(num){
+                if(this.result=="0") 
+                    this.result=num;
+                    else
+                    this.result +=num;
+            },  
+            calculate(){
+            
+            this.result=eval(this.result);
+            },
+            reset(){
+            this.result="0";
+            }
+        }
+      
+    })
+</script>
+</html>

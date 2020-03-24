@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!--Libreria Vue-->
+</head>
+<body>
+    <div id="app">
+        <span v-if='visible'>{{mensaje}}</span> <!--Variable if visible-->
+        <button @click='toggle' v-html='textoBoton'>Visible</button> <!--cuando hacemos click 
+        se va a la funcion toggle; variable html textoBoton, depende de visible-->
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            visible:false, //Por defecto el mensaje hola mundo no esta visible
+            mensaje:'Hola mundo'
+        },
+        computed:{ //para datos que son calculados
+            textoBoton: function(){
+                return this.visible?'Invisible':'Visible'; //Si visble es true, el texto del boton cambia a Invisible
+            }
+        },
+        methods:{
+            toggle: function(){
+                this.visible= !this.visible; //Cuando hacemos click, si el texto es visible, se vuelve invisible
+            }
+        }
+    })
+</script>
+</html>

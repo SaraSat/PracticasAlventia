@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!--Libreria Vue-->
+</head>
+<body>
+<div id="app">
+    {{mensaje}}
+</div>
+    <script>
+        var app = new Vue({ //nuevo objeto vue relacionado con el DOM
+            el:'#app', //El elemento app, id del div
+            data:{
+                mensaje:'Hola mundo!' //El dato, nuestro mensaje
+            }
+        })
+    </script>
+</body>
+</html>
