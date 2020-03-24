@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!--Libreria Vue-->
-
+    <style>
+        .active{color:white}
+    </style>
 </head>
 <body>
     <div id="app">
-       <table v-bind:style="styleTable" @click='cambioColor(styleTable)'>
+       <table v-bind:style="styleTable" v-bind:class="tableClass" @click='cambioColor()'>
            <tr>
              <td v-for="columnas in fila" v-bind:style="styleColumn">
                   {{columnas.text}}
@@ -27,20 +29,25 @@
                 {text: 'Columna 1 de la fila 1'},
                 {text:'Columna 2 de la fila 1'}
             ],
+           tableClass:{
+            active:true
+           },
             styleTable:{
                 border:'1px solid black',
                 background:'grey',
-                color:'white',
-                cursor:'pointer'
+                cursor:'pointer',
             },
             styleColumn:{
                border:'1px solid black',
                
-            }
+            },
+            
+            
         },
+       
         methods:{
-            cambioColor:function(styleTable){
-                this.styleTable.color='white'?'black':'white';
+            cambioColor:function(){
+                return this.tableClass=!this.tableClass;
             }
         }
     })
