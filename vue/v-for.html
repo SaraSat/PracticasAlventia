@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!--Libreria Vue-->
+
+</head>
+<body>
+    <div id="app">
+       <table v-bind:style="styleTable" @click='cambioColor(styleTable)'>
+           <tr>
+             <td v-for="columnas in fila" v-bind:style="styleColumn">
+                  {{columnas.text}}
+              </td>
+           </tr>
+       </table>
+    </div>
+    
+</body>
+<script>
+    var app =new Vue({
+        el:'#app',
+        data:{
+            fila:[
+                {text: 'Columna 1 de la fila 1'},
+                {text:'Columna 2 de la fila 1'}
+            ],
+            styleTable:{
+                border:'1px solid black',
+                background:'grey',
+                color:'white',
+                cursor:'pointer'
+            },
+            styleColumn:{
+               border:'1px solid black',
+               
+            }
+        },
+        methods:{
+            cambioColor:function(styleTable){
+                this.styleTable.color='white'?'black':'white';
+            }
+        }
+    })
+</script>
+
+</html>
