@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!--Libreria Vue-->
+
+</head>
+<style>
+    #app ul{
+        list-style: none;
+    }
+    #app ul li.comprado span{
+        text-decoration: line-through;
+    }
+</style>
+<body>
+    <h1>Lista de la compra</h1>
+    <div id="app">
+        <ul>
+            <li v-for="item in items" :key="item.id" :class="{comprado:item.comprado}">
+                <input type="checkbox" v-model="item.comprado">
+               
+                <span> {{item.texto}}</span>
+            </li>
+        </ul>
+        <h4>Añadir producto</h4>
+            <input type="text" :ref="item.texto">
+            <button @click="add">Añadir</button>
+    </div>
+</body>
+<script>
+    
+    var app  = new Vue({
+        el:'#app',
+        data:{
+            items:[
+                {
+                id:1,
+                texto:'Leche',
+                comprado:false
+                },
+                {
+                    id:2,
+                    texto:'Huevos',
+                    comprado:true
+                }
+            ]
+        },
+        computed:{
+            
+            
+
+        },
+        methods:{
+            add: function(ref){
+               texto=this.$refs[ref];
+                id++;
+                comprado=false;
+            }
+        }
+    })
+</script>
+</html>
