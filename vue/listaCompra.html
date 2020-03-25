@@ -26,7 +26,7 @@
             </li>
         </ul>
         <h4>Añadir producto</h4>
-            <input type="text" :ref="item.texto">
+            <input type="text" ref="newItem">
             <button @click="add">Añadir</button>
     </div>
 </body>
@@ -41,23 +41,16 @@
                 texto:'Leche',
                 comprado:false
                 },
-                {
-                    id:2,
-                    texto:'Huevos',
-                    comprado:true
-                }
+                
             ]
-        },
-        computed:{
             
-            
-
         },
         methods:{
-            add: function(ref){
-               texto=this.$refs[ref];
-                id++;
-                comprado=false;
+            add: function(){
+              this.items.push({
+                  id:this.items.length +1, texto:this.$refs.newItem.value,comprado:false
+              });
+              
             }
         }
     })
