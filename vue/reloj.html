@@ -11,8 +11,8 @@
     <div id="app">
         <div v-for='item in items' :key='item.ciudad'>
     
-         
-             {{item.ciudad}}  {{hh(item.offset)}}:{{mm(item.offset)}}:{{ss(item.offset)}}
+         <!--A la hora le pasamo como parámetro el item.offset de cada ciudad, es decir el cambio de huso horario-->
+             {{item.ciudad}}  {{hh(item.offset)}}:{{mm(item.offset)}}:{{ss(item.offset)}} 
          
     </div> 
     </div>
@@ -54,6 +54,7 @@
                 return new Date(this.ts+offset*3600*1000);
             },
 
+            //al reloj le pasamos como parámetro el offset, que se pasa a su vez al metodo getDate para sacar el tiempo en cada huso
            hh(offset){
               
                 let d=this.getDate(offset);
@@ -70,6 +71,7 @@
                 return d.getSeconds();
             }
         },
+        //Función que calcula el intervalo entre un segundo y el siguiente
         created: function(){
             setInterval(()=>{
                 this.ts=(new Date()).getTime();
