@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!--Libreria Vue-->
+
+</head>
+<body>
+    <div id="app">
+        <div v-for='item in items' :key='item.ciudad'>
+    
+         
+             {{item.ciudad}}  {{hh(item.offset)}}:{{mm(item.offset)}}:{{ss(item.offset)}}
+         
+    </div> 
+    </div>
+
+    
+</body>
+<script>
+
+    var app = new Vue({
+        el:'#app',
+        data:{
+            ts:0,
+            items:[
+                {
+                    ciudad:'Madrid',
+                    offset:0
+                },
+                {
+                    ciudad:'Lisboa',
+                    offset:-1
+                },
+                {
+                    ciudad:'Nueva York',
+                    offset: -6,
+                },
+                {
+                    ciudad:'Nueva Delhi',
+                    offset: 4.5
+                }
+
+            ]
+        },
+        computed:{
+           
+           
+        },
+        methods:{
+            getDate(offset){
+                return new Date(this.ts+offset*3600*1000);
+            },
+
+           hh(offset){
+              
+                let d=this.getDate(offset);
+
+                return d.getHours();
+            },
+            mm(offset){
+                let d=this.getDate(offset);
+                return d.getMinutes();
+            },
+            ss(offset){
+               
+                let d=this.getDate(offset);
+                return d.getSeconds();
+            }
+        },
+        created: function(){
+            setInterval(()=>{
+                this.ts=(new Date()).getTime();
+            },1000);
+            this.ts=(new Date()).getTime();
+        }
+    })
+</script>
+</html>
