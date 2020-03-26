@@ -5,11 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!--Libreria Vue-->
-
+    <style>
+        .reloj{
+            width: 100px;
+            border: 1px solid black;
+            margin: 10px;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
-        <div v-for='item in items' :key='item.ciudad'>
+        <div v-for='item in items' :key='item.ciudad' class="reloj">
     
          <!--A la hora le pasamo como parámetro el item.offset de cada ciudad, es decir el cambio de huso horario-->
              {{item.ciudad}}  {{hh(item.offset)}}:{{mm(item.offset)}}:{{ss(item.offset)}} 
