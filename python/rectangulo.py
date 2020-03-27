@@ -1,4 +1,3 @@
-#fichero rectangulo.py
 
 class Rectangulo:
     def __init__(self, base, altura):
