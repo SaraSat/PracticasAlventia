@@ -31,24 +31,44 @@
                 </div>
             </div>
         </template>
-        <div id="app" style='position: relative'>
-            <reloj-vue v-for='reloj in relojes'
+        <template id="template-reloj-central">
+            <div class="reloj-vue-central">
+                <reloj-vue v-for='reloj in relojes'
                 :key='reloj.nombre'
                 v-bind:title='reloj.nombre'
                 v-bind:ts='ts'
                 v-bind:offset='reloj.offset'
                 v-bind:style="{position: 'relative',top: reloj.Rtop + 'px', left: reloj.Rleft +'px'}"
             ></reloj-vue>
-            <reloj-vue style="position: relative; top: 100px; left: 300px;"
-                v-bind:title="'Madrid'"
-                v-bind:ts='ts'
-                v-bind:offset='0'
-            ></reloj-vue>
+
+            </div>
+        </template>
+        <div id="app" style='position: relative'>
+            <reloj-vue-central
+                v-bind:relojes='relojes'></reloj-vue-central>
         </div>
 </body>
 <script>
     'use strict'
+    Vue.component('reloj-vue-central',{
+        template:'#template-reloj-central',
+        props:{
+            relojes:[]
+        },
+        data: function(){
+           return{
+               ts:0
+           }
+        },
+        created: function(){
+            setInterval(()=>{
+                this.ts=(new Date()).getTime();
+            },1000);
+            this.ts=(new Date()).getTime();
 
+        }
+
+    })
     Vue.component('reloj-vue',{
         template:'#template-reloj',
         props:{
@@ -84,7 +104,6 @@
     var app=new Vue({
         el:'#app',
         data:{
-            ts:0,
             relojes:[
                 {
                     nombre:'Lisboa',
@@ -106,13 +125,7 @@
                 }
             ]
         },
-        created: function(){
-            setInterval(()=>{
-                this.ts=(new Date()).getTime();
-            },1000);
-            this.ts=(new Date()).getTime();
-
-        }
+    
     })
 
 </script>
