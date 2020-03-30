@@ -20,7 +20,7 @@
     }
 </style>
 <body>
-        <template id="template-reloj">
+        <template id="template-reloj"> <!--Elemento reloj, lo que se verá en la página, nombre y hora-->
             <div class="reloj-vue">
                 <h1>{{title}}</h1>
         
@@ -31,7 +31,7 @@
                 </div>
             </div>
         </template>
-        <template id="template-reloj-central">
+        <template id="template-reloj-central"> <!--Reloj central que genera el resto de relojes, contiene el componente reloj-->
             <div class="reloj-vue-central">
                 <reloj-vue v-for='reloj in relojes'
                 :key='reloj.nombre'
@@ -43,14 +43,14 @@
 
             </div>
         </template>
-        <div id="app" style='position: relative'>
+        <div id="app" style='position: relative'> <!-- aplicación que contiene el componente reloj central-->
             <reloj-vue-central
                 v-bind:relojes='relojes'></reloj-vue-central>
         </div>
 </body>
 <script>
     'use strict'
-    Vue.component('reloj-vue-central',{
+    Vue.component('reloj-vue-central',{ //Creacón del componente reloj central 
         template:'#template-reloj-central',
         props:{
             relojes:[]
@@ -69,7 +69,7 @@
         }
 
     })
-    Vue.component('reloj-vue',{
+    Vue.component('reloj-vue',{ //Creación del componente reloj vue, que lo contendrá el central
         template:'#template-reloj',
         props:{
             offset:{type:Number,default:0},
