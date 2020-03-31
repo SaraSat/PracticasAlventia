@@ -39,13 +39,12 @@ def lista_PUT(id):
     data=request.json
     with open('database.json') as f:
         database = json.loads(f.read())
-    res=database
 
-    item =[x for x in database if x['id']==id]
-    res =item[0] if item else None
-    database.update(data)
+    res =[x for x in database if x['id']==id]
+    for x in res:
+        database.update(x['comprado'],data)
+    
     return jsonify(res)
-
 
 @app.route('/api/lista/<id>', methods=['DELETE'])
 def lista_DELETE(id):

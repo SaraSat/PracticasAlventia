@@ -22,7 +22,7 @@
             <li v-for="item in items" :key="item.id" :class="{comprado:item.comprado}">
                
                
-                <span ref="item"> <input type="checkbox" v-model="item.comprado" @click="update" > {{item.texto}}</span>
+                <span ref="item"> <input type="checkbox" v-model="item.comprado" @click="update(item.id,item.comprado)" > {{item.texto}}</span>
             </li>
         </ul>
         <h4>Añadir producto</h4>
@@ -57,17 +57,13 @@
                     this.items.push(res.data);
               })
             },
-            update: function(){
-               if(this.comprado){
-                   dato=this.comprado=false;
-               }else{
-                   dato=this.comprado=true;
-               }
-               id=this.$refs.item.id
-                axios.put('/api/lista'+id, dato).then((res)=>{
+            update: function(id, comprado){
+                comprado=!comprado
+               
+                axios.put('/api/lista/'+id, comprado).then((res)=>{
                     res.data
                     var i=this.items.find((x)=> x.id==id);
-                    i.comprado=this.comprado
+                    i.comprado=comprado
                 })
             }
             
