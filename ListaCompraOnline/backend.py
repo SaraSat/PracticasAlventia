@@ -30,13 +30,22 @@ def lista_POST():
         comprado=False,
     )
     database.append(res)
-    with open('lista.json','w') as f:
+    with open('database.json','w') as f:
         f.write(json.dumps(database))
     return jsonify(res)
 
 @app.route('/api/lista/<id>',methods=['PUT'])
 def lista_PUT(id):
-    pass
+    data=request.json
+    with open('database.json') as f:
+        database = json.loads(f.read())
+    res=database
+
+    item =[x for x in database if x['id']==id]
+    res =item[0] if item else None
+    database.update(data)
+    return jsonify(res)
+
 
 @app.route('/api/lista/<id>', methods=['DELETE'])
 def lista_DELETE(id):
