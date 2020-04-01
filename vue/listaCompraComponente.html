@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!--Libreria Vue-->
+    <style>
+        .comprado{
+            text-decoration: line-through;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <lista-central v-bind:items='items'>
+        </lista-central>
+        <h4>Añadir producto</h4>
+        <input type="text" ref="newItem">
+        <button @click="add">Añadir</button>
+</div>
+
+    </div>
+    <template id="template-lista-central">
+        <div class="lista-central">
+            <lista v-for='item in items' :key='item.id' v-bind:id='item.id'
+            v-bind:texto='item.texto' v-bind:comprado='item.comprado'
+            :class="{comprado:item.comprado}">
+        </lista>     
+        </div>
+    </template>
+    <template id="template-lista">
+        <div class="lista">
+            <span >
+                <input type="checkbox" @click='modificar'> 
+
+                {{texto}}
+            </span>
+    
+        </div>
+
+    </template>
+
+</body>
+<script>
+    Vue.component('lista-central',{
+        template:'#template-lista-central',
+        props:{
+            items:[]
+        }
+    });
+    Vue.component('lista',{
+        template:'#template-lista',
+        props:{
+            id:{type:Number},
+            texto:{type:String},
+            comprado:{type:Boolean,default:false}
+        },
+   
+        methods:{
+            modificar:function(chek){
+                this.comprado=!this.comprado
+                return this.comprado
+            }
+        }
+    });
+
+    var app=new Vue({
+        el:'#app',
+        data:{
+            items:[
+
+                {
+                    id:0,
+                    texto:'Leche',
+                    comprado:false
+                },
+                {
+                    id:1,
+                    texto:'Huevos',
+                    comprado:false
+                }
+            ]
+        },
+        methods:{
+            add: function(){
+              this.items.push({
+                  id:this.items.length +1, texto:this.$refs.newItem.value,comprado:false
+              });
+              this.$refs.newItem.value="";
+            }
+        }
+
+    })
+</script>
+</html>
