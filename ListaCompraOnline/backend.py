@@ -56,12 +56,12 @@ def lista_DELETE(id):
         database = json.loads(f.read())
     
     for ix, item in enumerate(database):
-        if item['id]']==id:
+        if item['id']==id:
             break
     del database[ix]
 
     for ix, item in enumerate(database):
-        item['id']==ix
+        item['id']=ix
     
     with open('database.json','w') as f:
         f.write(json.dumps(database))
