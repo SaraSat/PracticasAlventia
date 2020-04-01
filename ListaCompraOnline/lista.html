@@ -24,7 +24,7 @@
                
                 <span ref="item"> 
                     <input type="checkbox" v-model="item.comprado" @click="update(item.id,item.texto,item.comprado)" >
-                    <button @click="borrar(item.id,item.texto,item.comprado)">Borrar</button> 
+                    <button @click="borrar(item.id)">Borrar</button> 
                     {{item.texto}}</span>
             </li>
         </ul>
@@ -69,15 +69,10 @@
                     i.comprado=datos.comprado
                 })
             },
-            borrar:function(itemId,itemTexto,itemComprado){
-               datos={
-                   id:itemId,
-                   texto:itemTexto,
-                   comprado:itemComprado,
-               }
-                axios.delete('/api/lista/'+datos).then((res)=>{
+            borrar:function(itemId){
+             
+                axios.delete('/api/lista/'+itemId).then((res)=>{
                     res.data
-                    this.items=res.data
 
                 })
             }
