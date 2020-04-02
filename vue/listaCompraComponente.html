@@ -34,7 +34,7 @@
     </template>
     <template id="template-lista">
         <div class="lista">
-            <input type="checkbox" v-bind:checked='checked' v-on:change="$emit('change','$event.target.checked')" >
+            <input type="checkbox" v-bind:checked='checked' v-on:change="$emit('change',$event.target.checked)" >
 
             <span>
 

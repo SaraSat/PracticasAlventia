@@ -19,7 +19,7 @@
     <template id="template-lista">
         <div class="lista">
             <input type="checkbox" v-bind:checked='checked' 
-            v-on:change="$emit('change','$event.target.checked')"
+            v-on:change="$emit('change',$event.target.checked)"
             v-on:click="$emit('toupdate')">
             <button v-on:click="$emit('toborrar')">Borrar</button> 
             <span>
@@ -53,7 +53,7 @@
     Vue.component('lista-central',{
         template:'#template-lista-central',
         props:{
-        items:[]
+            items:[]
         },
         methods:{
             update: function(itemId,itemTexto,itemComprado){
@@ -74,6 +74,7 @@
                     res.data
                     axios.get('/api/lista').then((res)=>{
                         res.data
+                        created
                         this.items=res.data
                     })
                 })
