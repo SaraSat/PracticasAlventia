@@ -8,33 +8,94 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <style>
-    #app ul{
-        list-style: none;
-    }
-    #app ul li.comprado span{
+   .comprado{
         text-decoration: line-through;
     }
     
 </style>
 <body>
     <h1>Lista de la compra</h1>
+
+    <template id="template-lista">
+        <div class="lista">
+            <input type="checkbox" v-bind:checked='checked' 
+            v-on:change="$emit('change','$event.target.checked')"
+            v-on:click="$emit('toupdate')">
+            <button v-on:click="$emit('toborrar')">Borrar</button> 
+            <span>
+                {{texto}}
+            </span>
+        </div>
+    </template>
+
+    <template id="template-lista-central">
+        <div class="lista-central">
+            <lista v-for='item in items' :key='item.id' v-bind:id='item.id'
+            v-bind:texto='item.texto' v-bind:comprado='item.comprado'
+            :class="{comprado:item.comprado}" v-model='item.comprado'
+            v-on:toupdate="update(item.id,item.texto,item.comprado)"
+            v-on:toborrar="borrar(item.id)">
+            </lista>    
+        </div>
+    </template>
+
+
     <div id="app">
-        <ul>
-            <li v-for="item in items" :key="item.id" :class="{comprado:item.comprado}">
-               
-               
-                <span > 
-                    <input type="checkbox" v-model="item.comprado" @click="update(item.id,item.texto,item.comprado)" >
-                    <button @click="borrar(item.id)">Borrar</button> 
-                    {{item.texto}}</span>
-            </li>
-        </ul>
+        <lista-central v-bind:items='items'>
+        </lista-central>
         <h4>Añadir producto</h4>
-            <input type="text" ref="newItem">
-            <button @click="add">Añadir</button>
+        <input type="text" ref="newItem">
+        <button @click="add">Añadir</button>
     </div>
 </body>
 <script>
+
+    Vue.component('lista-central',{
+        template:'#template-lista-central',
+        props:{
+        items:[]
+        },
+        methods:{
+            update: function(itemId,itemTexto,itemComprado){
+                itemComprado=!itemComprado
+                datos={
+                   id:itemId,
+                   texto:itemTexto,
+                   comprado:itemComprado,
+                }
+                axios.put('/api/lista/'+itemId, datos).then((res)=>{
+                    res.data
+                    var i=this.items.find((x)=> x.id==itemId);
+                    i.comprado=datos.comprado
+                })
+            },
+            borrar:function(itemId){
+                axios.delete('/api/lista/'+itemId).then((res)=>{
+                    res.data
+                    axios.get('/api/lista').then((res)=>{
+                        res.data
+                        this.items=res.data
+                    })
+                })
+            }
+        },
+
+    });
+    Vue.component('lista',{
+        template:'#template-lista',
+        model:{
+            prop:'checked',
+            event:'change'
+        },
+        props:{
+            id:{type:Number},
+            texto:{type:String},
+            comprado:{type:Boolean},
+            checked:Boolean
+        },
+        
+    });
+
     var app  = new Vue({
         el:'#app',
         data:{
@@ -45,44 +106,17 @@
         },
         methods:{
             add: function(){
-             
-                 datos={
+                datos={
                     texto:this.$refs.newItem.value,
                     comprado:false
-                 } 
+                } 
              
-              this.$refs.newItem.value="";
-              axios.post('/api/lista',datos).then((res)=>{
+                this.$refs.newItem.value="";
+                axios.post('/api/lista',datos).then((res)=>{
                     res.data
                     this.items.push(res.data);
-              })
-            },
-            update: function(itemId,itemTexto,itemComprado){
-                itemComprado=!itemComprado
-               datos={
-                   id:itemId,
-                   texto:itemTexto,
-                   comprado:itemComprado,
-               }
-                axios.put('/api/lista/'+itemId, datos).then((res)=>{
-                    res.data
-                    var i=this.items.find((x)=> x.id==itemId);
-                    i.comprado=datos.comprado
-                })
-            },
-            borrar:function(itemId){
-
-                axios.delete('/api/lista/'+itemId).then((res)=>{
-                    res.data
-                    axios.get('/api/lista').then((res)=>{
-                        res.data
-                        this.items=res.data
-                    })
-
-
                 })
             }
-            
         },
         created: function(){
             axios.get('/api/lista').then((res)=>{
@@ -90,6 +124,7 @@
                 this.items=res.data
             })
         }
+
     })
 </script>
 </html>

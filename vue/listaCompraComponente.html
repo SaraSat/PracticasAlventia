@@ -26,14 +26,17 @@
         <div class="lista-central">
             <lista v-for='item in items' :key='item.id' v-bind:id='item.id'
             v-bind:texto='item.texto' v-bind:comprado='item.comprado'
-            :class="{comprado:item.comprado}">
-        </lista>     
+            :class="{comprado:item.comprado}" v-model='item.comprado'>
+
+        </lista>    
+ 
         </div>
     </template>
     <template id="template-lista">
         <div class="lista">
-            <span >
-                <input type="checkbox" @click='modificar'> 
+            <input type="checkbox" v-bind:checked='checked' v-on:change="$emit('change','$event.target.checked')" >
+
+            <span>
 
                 {{texto}}
             </span>
@@ -52,18 +55,17 @@
     });
     Vue.component('lista',{
         template:'#template-lista',
+        model:{
+            prop:'checked',
+            event:'change'
+        },
         props:{
             id:{type:Number},
             texto:{type:String},
-            comprado:{type:Boolean,default:false}
+            comprado:{type:Boolean},
+            checked:Boolean
         },
    
-        methods:{
-            modificar:function(chek){
-                this.comprado=!this.comprado
-                return this.comprado
-            }
-        }
     });
 
     var app=new Vue({
