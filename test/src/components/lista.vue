@@ -1,7 +1,8 @@
 <template>
     <div>
+        <br><br>
         <input type="checkbox" name="" id="" v-bind:checked='checked' v-on:change="$emit('change',$event.target.checked)">
-        <span> {{item.texto}}</span>
+        <span> {{texto}}</span>
     </div>
 </template>
 <script>
