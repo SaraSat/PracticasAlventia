@@ -16,6 +16,12 @@ export default {
     return {
       relojes:[
         {
+          nombre:'Madrid',
+          offset:0,
+          Rleft:10
+        },
+
+        {
           nombre:'Lisboa',
           offset:-1,
           Rleft:10,

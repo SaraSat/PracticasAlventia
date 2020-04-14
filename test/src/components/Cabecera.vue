@@ -4,6 +4,7 @@
                     <h4>Añadir producto</h4>
         <input type="text" ref="newItem">
         <button @click="add">Añadir</button>
+        <p>-------------------------------</p>
 
     </div>
 </template>
