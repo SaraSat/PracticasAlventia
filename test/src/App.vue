@@ -1,11 +1,15 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">ListaCompra</router-link> |
+      <router-link to="/">ListaCompra</router-link> | 
       <router-link to="/about">Relojes</router-link>
     </div>
     <router-view/>
-
+<!--En la app, hay dos links,ver router/index.js, 
+ahi se especifica las rutas de cada link, home y about en este caso, 
+donde en cada uno se generan una serie de componentes distintos,
+los ejercicios de la  lista de la compra y el del reloj central
+En views se pueden ver -->
   </div>
 </template>
 <style lang="scss">

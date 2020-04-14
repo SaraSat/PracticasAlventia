@@ -6,9 +6,12 @@
         v-bind:offset='reloj.offset'
         v-bind:style="{position: 'relative',top: reloj.Rtop + 'px', left: reloj.Rleft +'px'}"
     ></Reloj>
-
     </div>
+    <!--En el reloj central se añade el componente reloj
+    que tiene el v-for para ir añadiendolos, como dato inicializamos
+    el ts en 0 y generamos un interval para los segundos--->
 </template>
+
 <script>
 import Reloj from '@/components/Reloj.vue'
 

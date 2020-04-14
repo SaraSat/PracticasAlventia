@@ -1,23 +1,4 @@
 
-<!-- <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
-</template>
-
-
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
-export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
-}
-</script> -->
 <template>
   <div class="home">
     <Cabecera v-bind:items='items'></Cabecera>
@@ -27,7 +8,11 @@ export default {
   </div>
 </template>
 
-
+<!--Plantilla que contiene dos componentes, una cabecera y 
+la lista de la compra que contiene a su vez el v-for para
+añadir todos los elementos que se vayan añadiendo
+Se importan ambos componentes, a su vez, se añade los estilos,
+y se especifica que la aplicación devuelve como datos los items-->
 
 
 <script>

@@ -3,6 +3,8 @@
     <RelojCentral v-bind:relojes='relojes'></RelojCentral>
   </div>
 </template>
+<!--La aplicación tiene un reloj central que contiene los 
+datos de cada uno de ellos -->
 
 <script>
 import RelojCentral from '@/components/RelojCentral.vue'

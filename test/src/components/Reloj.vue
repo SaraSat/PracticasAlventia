@@ -8,6 +8,8 @@
         </span>
         </div>
     </div>
+    <!--en esta plantilla se imprime el nombre del reloj, 
+    y la hora en función del valor del offset-->
 </template>
 <script>
 export default {

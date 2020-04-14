@@ -9,6 +9,9 @@
     </div>
 </template>
 
+<!--En la cabecera aparece el botón para añadir los items,
+tiene como propiedad el array de items y un método para añadirlos-->
+
 <script>
 export default {
     name:'Cabecera',
