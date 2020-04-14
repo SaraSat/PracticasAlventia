@@ -5,30 +5,9 @@
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>
-            <h4>Añadir producto</h4>
-        <input type="text" ref="newItem">
-        <button @click="add">Añadir</button>
 
   </div>
 </template>
-<script>
-export default {
-        data:function(){
-          return{
-            items:[]
-          }
-        },
-        methods:{
-            add: function(){
-              this.items.push({
-                  id:this.items.length +1, texto:this.$refs.newItem.value,comprado:false
-              });
-              this.$refs.newItem.value="";
-            }
-        }
-
-}
-</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

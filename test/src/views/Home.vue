@@ -20,11 +20,10 @@ export default {
 </script> -->
 <template>
   <div class="home">
-            <lista v-for='item in items' :key='item.id' v-bind:id='item.id'
+    <Cabecera v-bind:items='items'></Cabecera>
+            <Lista v-for='item in items' :key='item.id' v-bind:id='item.id'
             v-bind:texto='item.texto' v-bind:comprado='item.comprado'
-            :class="{comprado:item.comprado}" v-model='item.comprado'>
-
-        </lista>    
+            :class="{comprado:item.comprado}" v-model='item.comprado'></Lista>
   </div>
 </template>
 
@@ -33,14 +32,27 @@ export default {
 
 <script>
 // @ is an alias to /src
-import lista from '@/components/lista.vue'
+import Lista from '@/components/Lista.vue'
+import Cabecera from '@/components/Cabecera.vue'
 
 export default {
   name: 'Home',
   components: {
-    listaCentral,lista
+    Lista,Cabecera
   },  
+  data: function(){
+    return {
+      items:[]
+      }
+  }
 
       
 }
 </script> 
+
+    <style>
+        .comprado{
+            text-decoration: line-through;
+
+        }
+    </style>
